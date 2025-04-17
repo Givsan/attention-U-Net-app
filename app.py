@@ -98,7 +98,7 @@ if uploaded_file is not None and model is not None:
 
         with col1:
             st.subheader("Uploaded Image")
-            st.image(image_pil, use_column_width=True)
+            st.image(image_pil, use_container_width=True)
 
         # Add a button to trigger segmentation
         if st.button("Segment Image", key="segment_button"):
@@ -121,7 +121,7 @@ if uploaded_file is not None and model is not None:
             with col2:
                 st.subheader("Segmentation Result")
                 # Display the mask - use clamp=True for binary masks
-                st.image(segmented_mask_np, caption=f"Segmentation Mask (Threshold={THRESHOLD})", clamp=True, use_column_width=True)
+                st.image(segmented_mask_np, caption=f"Segmentation Mask (Threshold={THRESHOLD})", clamp=True, use_container_width=True)
                 st.success(f"Segmentation completed in {processing_time:.2f} seconds.")
                 # Optional: Add download button for the mask
                 # Convert numpy mask back to PIL Image to save
