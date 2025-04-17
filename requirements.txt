@@ -1,0 +1,6 @@
+streamlit
+torch
+torchvision
+numpy
+Pillow
+opencv-python-headless # Often needed by torchvision transforms or PIL
