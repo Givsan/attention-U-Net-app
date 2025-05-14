@@ -265,7 +265,7 @@ if uploaded_file is not None and model is not None:
                             rgb_bands_for_vis.append(scaled_band.astype(np.uint8))
                         vis_np_cwh = np.stack(rgb_bands_for_vis)
                         display_image_pil_or_np = Image.fromarray(vis_np_cwh.transpose(1,2,0), 'RGB')
-                    st.image(display_image_pil_or_np, caption=f"GeoTIFF Preview (Original: {src.width}x{src.height}, {src.count} bands, {src.dtypes[0]})", use_column_width=True)
+                    st.image(display_image_pil_or_np, caption=f"GeoTIFF Preview (Original: {src.width}x{src.height}, {src.count} bands, {src.dtypes[0]})", use_container_width=True)
                 else:
                     st.warning("Could not generate a preview for the GeoTIFF.")
                 input_tensor_for_model = preprocess_geotiff_data_for_model(src.read(), IMAGE_HEIGHT, IMAGE_WIDTH, IMG_MEAN, IMG_STD)
@@ -273,7 +273,7 @@ if uploaded_file is not None and model is not None:
             display_image_pil_or_np = Image.open(uploaded_file).convert("RGB")
             with col1:
                 st.subheader("Uploaded Image")
-                st.image(display_image_pil_or_np, use_column_width=True)
+                st.image(display_image_pil_or_np, use_container_width=True)
             input_tensor_for_model = preprocess_pil_image(display_image_pil_or_np, preprocess_transform_rgb)
             st.session_state.original_georef_info = None
 
@@ -291,7 +291,7 @@ if uploaded_file is not None and model is not None:
 
                 with col2:
                     st.subheader("Segmentation Result")
-                    st.image(segmented_mask_np_hw_display, caption=f"Segmentation Mask (Model Output: {IMAGE_WIDTH}x{IMAGE_HEIGHT})", clamp=True, use_column_width=True)
+                    st.image(segmented_mask_np_hw_display, caption=f"Segmentation Mask (Model Output: {IMAGE_WIDTH}x{IMAGE_HEIGHT})", clamp=True, use_container_width=True)
                     st.success(f"Segmentation done in {processing_time:.2f}s.")
                     mask_img_pil = Image.fromarray((segmented_mask_np_hw_display * 255).astype(np.uint8))
                     buf = io.BytesIO()
